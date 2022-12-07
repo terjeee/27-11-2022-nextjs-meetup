@@ -31,6 +31,22 @@ const DUMMY_MEETUPS = [
   },
 ];
 
-export default function HomePage() {
-  return <MeetupList meetups={DUMMY_MEETUPS} />;
+// export async function getStaticProps() {
+//   // fetch data from DB
+//   // do whatever (user wont see this)
+//   return { props: { meetups: DUMMY_MEETUPS } };
+// }
+
+// export default function HomePage(props) {
+//   return <MeetupList meetups={props.meetups} />;
+// }
+
+export async function getStaticProps() {
+  // fetch data from DB
+
+  return { props: { fetchedData: fetchedData }, revalidate: 10 };
+}
+
+export default function Page(props) {
+  return <div>{props.fetchedData}</div>;
 }
