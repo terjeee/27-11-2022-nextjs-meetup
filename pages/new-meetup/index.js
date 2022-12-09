@@ -9,7 +9,7 @@ export default function NewMeetup() {
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error.message));
   }
 
   return <NewMeetupForm onAddMeetup={handleAddMeetup} />;

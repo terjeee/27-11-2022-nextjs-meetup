@@ -4,25 +4,20 @@ import { MongoClient } from "mongodb";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    try {
-      const data = req.data;
+    const data = req.data;
 
-      const client = await MongoClient.connect(
-        "mongodb+srv://admin:CSXKsONjiLxacqZJ@cluster0.rwpguft.mongodb.net/?retryWrites=true&w=majority"
-      );
+    const client = await MongoClient.connect(
+      "mongodb+srv://admin:123@cluster0.rwpguft.mongodb.net/?retryWrites=true&w=majority"
+    );
 
-      const db = client.db();
+    const database = client.db();
 
-      const collectionMeetups = db.collection("meetups");
+    const collectionMeetups = database.collection("meetups");
 
-      const result = await collectionMeetups.insertOne(data);
-      console.log(result);
+    const result = await collectionMeetups.insertOne(data);
 
-      client.close();
+    client.close();
 
-      res.status(201).json({ message: "Meetup Added!" });
-    } catch (error) {
-      console.log(error);
-    }
+    res.status(201).json({ message: "Meetup Added!" });
   }
 }
