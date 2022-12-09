@@ -31,22 +31,25 @@ const DUMMY_MEETUPS = [
   },
 ];
 
-// export async function getStaticProps() {
-//   // fetch data from DB
-//   // do whatever (user wont see this)
+export async function getStaticProps() {
+  // do whatever (user wont see this, code runds on the server, not the client)
+  // fetch data from DB = fetchedData
+
+  // return { props: { fetchedData: fetchedData }, revalidate: 10 };
+  return { props: { meetups: DUMMY_MEETUPS }, revalidate: 60 };
+}
+
+// export async function getServerSideProps(context) {
+//   const request = context.req;
+//   const response = context.res;
+
+//   // fetch data from an API = fetchedData
+//   // do whatever (user wont see this, code runds on the server, not the client)
+
+//   // return { props: { fetchedData: fetchedData } };
 //   return { props: { meetups: DUMMY_MEETUPS } };
 // }
 
-// export default function HomePage(props) {
-//   return <MeetupList meetups={props.meetups} />;
-// }
-
-export async function getStaticProps() {
-  // fetch data from DB
-
-  return { props: { fetchedData: fetchedData }, revalidate: 10 };
-}
-
-export default function Page(props) {
-  return <div>{props.fetchedData}</div>;
+export default function HomePage(props) {
+  return <MeetupList meetups={props.meetups} />;
 }
